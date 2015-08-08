@@ -4,13 +4,9 @@
 <title> 파일 업로드 테스트 - tango server </title>
 </head>
 <body>
-<form id        =  "uploadForm"
-     enctype   =  "multipart/form-data"
-     action    =  "/api/photo"
-     method    =  "post"
->
-<input type="file" name="userPhoto" />
-<input type="submit" value="Upload Image" name="submit">
+<form action="/files/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="myfile" />
+    <input type="submit" name="upload" />
 </form>
 </body>
 </html>
