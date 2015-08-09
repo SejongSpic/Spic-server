@@ -33,7 +33,7 @@ router.post('/upload', upload.single('myfile'), function (req, res, next) {
   console.log('The file was saved !');
   console.log(req.file); // form fields
 
-  res.status(200).end();
+  res.redirect('http://ec2-54-199-201-110.ap-northeast-1.compute.amazonaws.com/uploads/');
 })
 
 /* GET home page. */
