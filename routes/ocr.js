@@ -41,12 +41,7 @@ router.post('/upload', upload.single('myfile'), function (req, res, next) {
           console.error(err);
       } else {
           console.log(text);
-          //res.send(text);
-          res.render('uploaded', {
-            title : 'OCR 테스트',
-            result : text,
-            image_path : 'http://ec2-54-199-201-110.ap-northeast-1.compute.amazonaws.com/uploads/'+req.file.originalname
-          });
+          res.json({ message : 'success', result : text });
       }
   });
 })
