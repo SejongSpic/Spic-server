@@ -27,10 +27,12 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });  
 
 router.get('/upload', function(req, res, next){
-  res.send("Error");
+  res.send("잘못된 경로입니다 !");
 });
 
 router.post('/upload', upload.single('myfile'), function (req, res, next) {
+  //res.send('req : '+req.get('uuid'));
+  //res.status(200).json({ message: 'success' });
   console.log('The file was saved !');
   console.log(req.file); // form fields
 
