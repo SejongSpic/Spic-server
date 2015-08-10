@@ -14,15 +14,13 @@ var upload_path = "/var/www/uploads"; // uplaod file storage path
 var router = express.Router();
 var app = express();
 
-var image_path = '/var/www/uploads/testimage/test.png';
-
 /* Set up storage */
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, upload_path);
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now()+'_'+file.originalname);
+    cb(null, file.originalname);
   }
 });
 
@@ -36,7 +34,6 @@ router.post('/upload', upload.single('myfile'), function (req, res, next) {
   console.log('The file was saved !');
   console.log(req.file); // form fields
 
-
   //res.redirect('http://ec2-54-199-201-110.ap-northeast-1.compute.amazonaws.com/uploads/');
   //res.set('Content-Type', 'text/html');
 
@@ -47,8 +44,9 @@ router.post('/upload', upload.single('myfile'), function (req, res, next) {
           console.log(text);
           //res.send(text);
           res.render('uploaded', {
-            title : 'memOCR',
-            result : text
+            title : 'OCR 테스트',
+            result : text,
+            image_path : 'http://ec2-54-199-201-110.ap-northeast-1.compute.amazonaws.com/uploads/'+req.file.originalname
           });
       }
   });
