@@ -38,7 +38,7 @@ router.post('/best/upload', upload.single('myfile'), function (req, res, next) {
   ], function(err, results) {
     if(err) {
         console.error("Error : "+err);
-        res.status(404).json({ message : 'fail', result : null });
+        res.status(404).json({ message : 'fail', result : 'null' });
     } else {
       res.status(200).json({ message : 'success', result : results[0] });
     }
@@ -58,7 +58,7 @@ router.post('/mem/upload', upload.single('myfile'), function (req, res, next) {
         var len = text.trim().length;
 
         if(len == 0)
-          text = null;
+          text = 'null';
         
         res.status(200).json({ message : 'success', result : text });
       }
