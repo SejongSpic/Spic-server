@@ -6,7 +6,9 @@ var multer = require('multer');
 var http = require('http');
 var util = require('util');
 var fs = require('fs');
-var tesseract = require('node-tesseract');
+var tesseractOCR = require('node-tesseract');
+var abbyyOCR = require('../lib/abbyy/test');
+var async = require('async');
 
 var upload_path = "/var/www/uploads"; // uplaod file storage path
 
@@ -25,23 +27,40 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });  
 
-router.post('/', upload.single('myfile'), function (req, res, next) {
+router.post('/best/upload', upload.single('myfile'), function (req, res, next) {
+  console.log('Abbyy OCR Start');
+
+  async.parallel([
+    function(callback) {
+      // do something
+      abbyyOCR.process(req.file.path, req.file.originalname, callback);
+    }
+  ], function(err, results) {
+    if(err) {
+        console.error("Error : "+err);
+        res.status(404).json({ message : 'fail', result : null });
+    } else {
+      res.status(200).json({ message : 'success', result : results[0] });
+    }
+  });
 });
 
 // POST - 안드로이드로부터 이미지 받음
-router.post('/upload', upload.single('myfile'), function (req, res, next) {
-  //res.send('req : '+req.get('uuid'));
-  //res.status(200).json({ message: 'success' });
-  
-  console.log('The file was saved !');
-  console.log('req.file : '+req.file); // form fields
+router.post('/mem/upload', upload.single('myfile'), function (req, res, next) {
+  console.log('Mem OCR Start');
 
-  tesseract.process(req.file.path, function(err, text) {
+  tesseractOCR.process(req.file.path, function(err, text) {
       if(err) {
           console.error(err);
+          res.status(404).json({ message : 'fail', result : null });
       } else {
-          console.log(text);
-          res.json({ message : 'success', result : text });
+        console.log(text);
+        var len = text.trim().length;
+
+        if(len == 0)
+          text = null;
+        
+        res.status(200).json({ message : 'success', result : text });
       }
   });
 })
