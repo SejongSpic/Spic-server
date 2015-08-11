@@ -12,6 +12,8 @@ var ocr = require('./routes/ocr');
 
 var app = express();
 
+var port = 8000;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -60,9 +62,9 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(8000, function()
+app.listen(port, function()
 {
-  console.log("Server start.");
+  console.log("memOCR's Server start ( port : "+port+" )");
 });
 
 module.exports = app;
