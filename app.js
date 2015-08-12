@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+require('console-stamp')(console, '[HH:MM:ss.l]'); //add timestamps in front of log messages
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -13,6 +14,16 @@ var ocr = require('./routes/ocr');
 var app = express();
 
 var port = 8000;
+
+/* Console timestamp 
+//since logger only returns a UTC version of date, I'm defining my own date format - using an internal module from console-stamp
+express.logger.format('mydate', function() {
+    var df = require('console-stamp/node_modules/dateformat');
+    return df(new Date(), 'HH:MM:ss.l');
+});
+
+app.use(express.logger('[:mydate] :method :url :status :res[content-length] - :remote-addr - :response-time ms'));
+*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
