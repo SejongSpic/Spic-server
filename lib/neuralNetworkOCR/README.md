@@ -9,7 +9,6 @@ Installation
 ------------
 
 ``` sh
-git clone https://github.com/mandor53/mediocr.git
 make
 ```
 
