@@ -1,7 +1,7 @@
-MediOCR
+SpicOCR
 =======
 
-MediOCR is a project that had to be done during the fall semester at Sejong University. Its main purpose is to be able to recognize text inside an image, no matter how much noise is present, or what font family/size/color has been used.
+SpicOCR is a project that had to be done during the fall semester at Sejong University. Its main purpose is to be able to recognize text inside an image, no matter how much noise is present, or what font family/size/color has been used.
 
 To do so, a neural network had to be used. If needed, the neural network can be used in other projects, as it is very flexible.
 
@@ -20,7 +20,7 @@ Usage
 
 ### Overview
 
-As of now, MediOCR is able to recognize a text in an image which has some noise in it. It is also able to correct words using a dictionary. MediOCR is also able to learn multiple fonts and recognize them, as well as some special characters if they've been put into the learning set.
+As of now, SpicOCR is able to recognize a text in an image which has some noise in it. It is also able to correct words using a dictionary. SpicOCR is also able to learn multiple fonts and recognize them, as well as some special characters if they've been put into the learning set.
 
 ### Help
 
@@ -30,7 +30,7 @@ As of now, MediOCR is able to recognize a text in an image which has some noise 
 
 ### Execution
 
-Making MediOCR output the text it recognized is one of the easiest things, all you need to do is specify the file that you want to process.
+Making SpicOCR output the text it recognized is one of the easiest things, all you need to do is specify the file that you want to process.
 
 ``` sh
 ./main -f "path/to/file.bmp"
@@ -44,7 +44,7 @@ Dictionaries are used to automatically correct any mistake made by the neural ne
 ./main -f "path/to/file.bmp" -d "path/to/dictionary.txt"
 ```
 
-### Make MedioCR learn (populate the learning set and store weights)
+### Make SpicOCR learn (populate the learning set and store weights)
 
 The alphabet can be anything, and contain any character.
 The path/to/learning/set directory must be formated the same way as in data/letters (which is the default learning set directory). The name of the directories inside is the ascii value of the characters. The images should be squares.
